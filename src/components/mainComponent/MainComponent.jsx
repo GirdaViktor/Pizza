@@ -1,18 +1,18 @@
 import React from 'react';
-import Categories from "../categories/Categories";
-import Sort from "../sort/Sort";
-import ContainerItems from "../containerIItems/ContainerItems";
+import HomePages from "../pages/HomePages";
+import {Routes, Route} from "react-router-dom";
+import NotFound from "../pages/NotFound";
+import CartPage from "../pages/CartPage";
 
 const MainComponent = () => {
   return (
     <div className="content">
       <div className="container">
-        <div className="content__top">
-          <Categories/>
-          <Sort/>
-        </div>
-        <h2 className="content__title">Все пиццы</h2>
-        <ContainerItems/>
+        <Routes>
+          <Route path={'/'} element={<HomePages/>}/>
+          <Route path={'/cart'} element={<CartPage/>}/>
+          <Route path={'*'} element={<NotFound/>}/>
+        </Routes>
       </div>
     </div>
   );
