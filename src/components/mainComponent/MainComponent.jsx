@@ -9,7 +9,7 @@ const MainComponent = () => {
     <div className="content">
       <div className="container">
         <Routes>
-          <Route path={'/'} element={<HomePages/>}/>
+          <Route path={'/'} element={<HomePages />}/>
           <Route path={'/cart'} element={<CartPage/>}/>
           <Route path={'*'} element={<NotFound/>}/>
         </Routes>

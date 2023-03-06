@@ -1,13 +1,22 @@
 import React, {useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {setSort} from "../../redux/slices/filterSlice";
 
-const Sort = ({value, onChangeSort}) => {
+const Sort = () => {
   const [isSortPopup, setIsSortPopup] = useState(false);
+  const sortItem = useSelector(state => state.filter.sort);
+  const dispatch = useDispatch();
 
   const sort = [
     {name: 'популярности', sort: 'rating'},
     {name: 'цене', sort: 'price'},
     {name: 'алфавиту', sort: 'title'},
   ];
+
+  const onChangeSort = (value) => {
+    setIsSortPopup(false);
+    dispatch(setSort(value));
+  };
 
   return (
     <div className="sort">
@@ -25,15 +34,14 @@ const Sort = ({value, onChangeSort}) => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span>{value.name}</span>
+        <span>{sortItem.name}</span>
       </div>
       {isSortPopup ? (<div className="sort__popup">
         <ul>
           {sort.map((item, i) => <li
             key={i}
-            className={value.sort === item.sort ? 'active' : ''}
+            className={sortItem === item.sort ? 'active' : ''}
             onClick={() => {
-              setIsSortPopup(false);
               onChangeSort(item);
             }}
           >{item.name}</li>)}
