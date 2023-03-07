@@ -3,6 +3,7 @@ import Categories from "../categories/Categories";
 import Sort from "../sort/Sort";
 import ContainerItems from "../containerIItems/ContainerItems";
 import {useSelector} from "react-redux";
+import axios from "axios";
 
 const HomePages = () => {
   const categoryItem = useSelector(state => state.filter.categoryId);
@@ -14,21 +15,14 @@ const HomePages = () => {
   useEffect(() => {
     setIsLoading(true);
     const categoryUrl = categoryItem > 0 ? `category=${categoryItem}` : '';
-    fetch(
-      `https://63ff64b6571200b7b7dcf348.mockapi.io/items?page=${currentPage}&limit=8&${categoryUrl}&sortBy=${sortItem.sort}`
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-      })
-      .then((arr) => {
+
+    axios.get(`https://63ff64b6571200b7b7dcf348.mockapi.io/items?page=${currentPage}&limit=8&${categoryUrl}&sortBy=${sortItem.sort}`)
+      .then(r => {
         setTimeout(() => {
-          setItems(arr);
+          setItems(r.data);
           setIsLoading(false);
-          }, 500)
-      })
-      .catch(error => console.log(error));
+        }, 500)
+      } );
     }, [categoryItem, sortItem, currentPage]);
 
   return (
