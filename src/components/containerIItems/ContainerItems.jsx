@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
 import CardItem from "../cardItem/CardItem";
-import ReactPaginate from "react-paginate";
 import {SearchContext} from "../../App";
+import Pagination from "../pagination/pagination";
 
-const ContainerItems = ({items, isLoading, setPage}) => {
+const ContainerItems = ({items, isLoading }) => {
   const { searchItem } = useContext(SearchContext);
 
   return (
@@ -16,18 +16,7 @@ const ContainerItems = ({items, isLoading, setPage}) => {
             .map((item) => (<CardItem {...item} key={item.id}/>))
         }
       </ul>
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={evt => {
-          console.log(evt);
-          setPage(evt.selected + 1)
-        }}
-        pageRangeDisplayed={8}
-        pageCount={6}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
-      />
+      <Pagination/>
     </>
   );
 };

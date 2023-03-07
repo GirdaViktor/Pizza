@@ -8,7 +8,7 @@ import axios from "axios";
 const HomePages = () => {
   const categoryItem = useSelector(state => state.filter.categoryId);
   const sortItem = useSelector(state => state.filter.sort);
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = useSelector(state => state.filter.pageCount);
   const [isLoading, setIsLoading] = useState(true);
   let [items, setItems] = useState([]);
 
@@ -32,7 +32,7 @@ const HomePages = () => {
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
-      <ContainerItems items={items} isLoading={isLoading} setPage={setCurrentPage} />
+      <ContainerItems items={items} isLoading={isLoading} />
     </>
   );
 };
