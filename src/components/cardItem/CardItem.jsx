@@ -1,9 +1,25 @@
 import React, {useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {addItem} from "../../redux/slices/cartSlice";
 
-const CardItem = ({title, types, size, price, imgUrl}) => {
+const CardItem = ({id, title, types, size, price, imgUrl}) => {
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
   const typeNames = ['тонкое', 'традиционное'];
+  const cartItem = useSelector(state => state.cart.items.find(obj => obj.id === id));
+  const dispatch = useDispatch();
+
+  const onClickAdd = () => {
+    const item = {
+      id,
+      title,
+      price,
+      imgUrl,
+      activeType,
+      activeSize,
+    };
+    dispatch(addItem(item));
+  };
 
   return (
     <li className="pizza-block">
@@ -33,7 +49,9 @@ const CardItem = ({title, types, size, price, imgUrl}) => {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
-        <div className="button button--outline button--add">
+        <div
+          onClick={onClickAdd}
+          className="button button--outline button--add">
           <svg
             width="12"
             height="12"
@@ -47,7 +65,7 @@ const CardItem = ({title, types, size, price, imgUrl}) => {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
+          {cartItem ? <i>{cartItem.count}</i> : ''}
         </div>
       </div>
     </li>

@@ -1,17 +1,12 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {setSort} from "../../redux/slices/filterSlice";
+import {sortList} from "./enum";
 
 const Sort = () => {
   const [isSortPopup, setIsSortPopup] = useState(false);
   const sortItem = useSelector(state => state.filter.sort);
   const dispatch = useDispatch();
-
-  const sort = [
-    {name: 'популярности', sort: 'rating'},
-    {name: 'цене', sort: 'price'},
-    {name: 'алфавиту', sort: 'title'},
-  ];
 
   const onChangeSort = (value) => {
     setIsSortPopup(false);
@@ -38,7 +33,7 @@ const Sort = () => {
       </div>
       {isSortPopup ? (<div className="sort__popup">
         <ul>
-          {sort.map((item, i) => <li
+          {sortList.map((item, i) => <li
             key={i}
             className={sortItem === item.sort ? 'active' : ''}
             onClick={() => {

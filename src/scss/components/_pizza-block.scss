@@ -1,7 +1,16 @@
 @import '../_variables';
 
 .pizza-block {
-  width: calc(calc(100% - 45px)/4);
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: calc(calc(100% - 45px)/3);
+  }
+
+  @media (min-width: 960px) {
+    width: calc(calc(100% - 45px)/4);
+  }
+
   text-align: center;
   margin-bottom: 65px;
 
@@ -10,7 +19,8 @@
   }
 
   &__image {
-    width: 260px;
+    width: 100%;
+    max-width: 260px;
   }
 
   &__title {

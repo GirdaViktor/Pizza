@@ -2,15 +2,35 @@ import React, {useEffect, useState} from 'react';
 import Categories from "../categories/Categories";
 import Sort from "../sort/Sort";
 import ContainerItems from "../containerIItems/ContainerItems";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
+import qs from "qs";
+import {useNavigate} from "react-router-dom";
+import {setFilters} from "../../redux/slices/filterSlice";
+import {sortList} from "../sort/enum";
 
 const HomePages = () => {
   const categoryItem = useSelector(state => state.filter.categoryId);
   const sortItem = useSelector(state => state.filter.sort);
   const currentPage = useSelector(state => state.filter.pageCount);
+
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
   let [items, setItems] = useState([]);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      const sort = sortList.find(item => item.sort === params.sortItem);
+
+      dispatch(setFilters({
+        ...params,
+        sort
+      }))
+    }
+  },[]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -24,6 +44,16 @@ const HomePages = () => {
         }, 500)
       } );
     }, [categoryItem, sortItem, currentPage]);
+
+  useEffect(() => {
+    const url = qs.stringify({
+      categoryItem,
+      sortItem: sortItem.sort,
+      currentPage
+    });
+
+    navigate(`?${url}`);
+  },[categoryItem, sortItem, currentPage]);
 
   return (
     <>
