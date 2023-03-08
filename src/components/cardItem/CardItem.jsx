@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {addItem} from "../../redux/slices/cartSlice";
+import {typeNames} from "./enum";
 
 const CardItem = ({id, title, types, size, price, imgUrl}) => {
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
-  const typeNames = ['тонкое', 'традиционное'];
   const cartItem = useSelector(state => state.cart.items.find(obj => obj.id === id));
   const dispatch = useDispatch();
 
@@ -16,7 +16,7 @@ const CardItem = ({id, title, types, size, price, imgUrl}) => {
       price,
       imgUrl,
       activeType,
-      activeSize,
+      activeSize: size[activeSize],
     };
     dispatch(addItem(item));
   };

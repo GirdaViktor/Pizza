@@ -10,7 +10,6 @@ const Search = () => {
 
   const updateSearchValue = useCallback(debounce((str)=> {
     setSearchItem(str);
-    console.log(str);
     }, 500), []);
 
   const onChangeInput = (evt) => {
