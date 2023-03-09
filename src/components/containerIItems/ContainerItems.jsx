@@ -1,19 +1,34 @@
 import React, {useContext} from 'react';
+import {useSelector} from "react-redux";
 import CardItem from "../cardItem/CardItem";
-import {SearchContext} from "../../App";
 import Pagination from "../pagination/pagination";
+import {SearchContext} from "../../App";
 
-const ContainerItems = ({items, isLoading }) => {
+const ContainerItems = () => {
   const { searchItem } = useContext(SearchContext);
+  const {items, status} = useSelector(state => state.data);
 
   return (
     <>
       <ul className="content__items">
         {
-          isLoading ? <div> 'Идет загрузка'</div> :
-          items
+          status === 'loading'
+            ? <div>Идет загрузка данных</div>
+            : ''
+        }
+
+        {
+          status === 'success'
+            ? items
             .filter(item => item.title.toLowerCase().includes(searchItem.toLowerCase()) ? true : false)
             .map((item) => (<CardItem {...item} key={item.id}/>))
+            : ''
+        }
+
+        {
+          status === 'error'
+            ? <div>Ошибка при получиении данных</div>
+            : ''
         }
       </ul>
       <Pagination/>
