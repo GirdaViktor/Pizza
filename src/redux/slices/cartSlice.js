@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
   totalPrice: 0,
-  items: []
+  items: [],
 };
 
 const cartSlice = createSlice({
@@ -28,6 +28,7 @@ const cartSlice = createSlice({
       if (findItem) {
         findItem.count++
       }
+      state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.count + sum, 0);
     },
     decItem(state, action) {
       const findItem = state.items.find((item) => item.id === action.payload.id);
@@ -38,6 +39,7 @@ const cartSlice = createSlice({
       if (findItem.count < 0) {
         findItem.count = 0
       }
+      state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.count + sum, 0);
     },
 
     deleteItem(state, action)  {
@@ -51,5 +53,7 @@ const cartSlice = createSlice({
   }
 });
 
+export const selectorCart = state => state.cart;
+export const selectorCartById = id => state => state.cart.items.find(obj => obj.id === id);
 export const { addItem, deleteItem, clearItems, incItem, decItem } = cartSlice.actions;
 export default cartSlice.reducer;

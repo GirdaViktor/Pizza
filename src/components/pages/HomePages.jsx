@@ -1,18 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import qs from "qs";
+import { useNavigate } from "react-router-dom";
 import Categories from "../categories/Categories";
 import Sort from "../sort/Sort";
 import ContainerItems from "../containerIItems/ContainerItems";
-import {useDispatch, useSelector} from "react-redux";
-import qs from "qs";
-import {useNavigate} from "react-router-dom";
-import {setFilters} from "../../redux/slices/filterSlice";
-import {sortList} from "../sort/enum";
-import {fetchDataItems, setData} from "../../redux/slices/dataSlice";
+import { selectorFilter, setFilters } from "../../redux/slices/filterSlice";
+import { sortList } from "../sort/Sort.enum";
+import { fetchDataItems } from "../../redux/slices/dataSlice";
 
 const HomePages = () => {
-  const categoryItem = useSelector(state => state.filter.categoryId);
-  const sortItem = useSelector(state => state.filter.sort);
-  const currentPage = useSelector(state => state.filter.pageCount);
+  const filter = useSelector(selectorFilter);
+  const categoryItem = filter.categoryId;
+  const sortItem = filter.sort;
+  const currentPage = filter.pageCount;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

@@ -1,28 +1,20 @@
 import React from 'react';
-import {setCategoryId} from "../../redux/slices/filterSlice";
-import {useDispatch, useSelector} from "react-redux";
+import { selectorFilter, setCategoryId } from "../../redux/slices/filterSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { CATEGORIES_LIST } from './Categories.enum';
 
 const Categories = () => {
-  const categoryItem = useSelector(state => state.filter.categoryId);
+  const categoryItem = useSelector(selectorFilter).categoryId;
   const dispatch = useDispatch();
 
   const onChangeCategory = (value) => {
     dispatch(setCategoryId(value))
   };
 
-  const categories = [
-    {id: 0, name: 'Все'},
-    {id: 1, name: 'Мясные',},
-    {id: 2, name: 'Вегетарианские',},
-    {id: 3, name: 'Гриль',},
-    {id: 4, name: 'Острые'},
-    {id: 5, name: 'Закрытые'},
-  ];
-
   return (
     <div className="categories">
       <ul>
-        {categories.map(item =>
+        {CATEGORIES_LIST.map(item =>
           <li
             onClick={() => onChangeCategory(item.id)}
             key={item.id}

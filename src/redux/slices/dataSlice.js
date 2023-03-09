@@ -23,7 +23,6 @@ const dataSlice = createSlice({
   },
   extraReducers: {
     [fetchDataItems.pending]: (state) => {
-      console.log('Идет отправка запроса');
       state.status = 'loading';
       state.items = [];
     },
@@ -34,10 +33,10 @@ const dataSlice = createSlice({
     [fetchDataItems.rejected]: (state) => {
       state.status = 'error';
       state.items = [];
-      console.log('Ошибка запроса');
     }
   }
 });
 
+export const selectorData = state => state.data;
 export const { setData } = dataSlice.actions;
 export default dataSlice.reducer;
