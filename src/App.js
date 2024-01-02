@@ -1,15 +1,18 @@
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
-import {dataSelector, fetchDataItems} from "./Redux/dataSlice";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+
+import { dataSelector, fetchDataItems } from "./Redux/dataSlice";
+import {useAppDispatch} from "./Redux/Store";
 
 function App() {
   const { items } = useSelector(dataSelector);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const getData = () => dispatch(fetchDataItems());
 
   useEffect(() => {
-    getData()
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log(items);
