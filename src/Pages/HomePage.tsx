@@ -5,7 +5,6 @@ import ContentTop from "../Components/Content/ContentTop/ContentTop";
 import ContentItems from "../Components/Content/ContentItems/ContentItems";
 const HomePage: React.FC = () => {
 
-
   return (
     <ContentBox>
       <ContentTop />
