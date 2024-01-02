@@ -223,7 +223,6 @@ const Cart: React.FC = () => {
             </div>
           </div>
         </div>
-
       </div>
       <CartBottom />
     </div>

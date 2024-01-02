@@ -1,9 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const Sort:React.FC = () => {
+  const [open, setOpen] = useState(false);
+  const [activeSort, setActiveSort] = useState({name: 'популярности', sort: 'rating' });
+
+  const filters = [
+    {name: 'популярности', sort: 'rating' },
+    {name: 'цене', sort: 'price' },
+    {name: 'алфавиту', sort: 'title' },
+  ];
+
+  const onClickItemSort = (item:{name: string, sort: string}) => {
+    setOpen(false);
+    setActiveSort(item);
+  };
+
+  const onClickOpenSort = () => {
+    open ? setOpen(false) : setOpen(true);
+  };
+
   return (
     <div className="sort">
-      <div className="sort__label">
+      <div className="sort__label"
+        onClick={onClickOpenSort}
+      >
         <svg
           width="10"
           height="6"
@@ -17,15 +37,22 @@ const Sort:React.FC = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span>популярности</span>
+        <span>{activeSort.name}</span>
       </div>
-      <div className="sort__popup">
-        <ul>
-          <li className="active">популярности</li>
-          <li>цене</li>
-          <li>алфавиту</li>
-        </ul>
-      </div>
+      { open &&
+        <div className="sort__popup">
+          <ul>
+            {filters.map(item =>
+              <li
+                className={activeSort.sort === item.sort ? "active" : ''}
+                key={item.sort}
+                onClick={() => onClickItemSort(item)}
+              >
+                {item.name}</li>)
+            }
+          </ul>
+        </div>
+        }
     </div>
   );
 };
