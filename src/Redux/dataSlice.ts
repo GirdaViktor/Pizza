@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import axios from "axios";
-import {RootState} from "./Store";
+import { RootState } from "./Store";
 
 export const fetchDataItems = createAsyncThunk(
   'data/fetchDataStatus', async () => {
@@ -8,7 +8,7 @@ export const fetchDataItems = createAsyncThunk(
     return data;
   });
 
-interface IDataItem {
+export interface IDataItem {
   category: number;
   id: string;
   imgUrl: string;
@@ -17,6 +17,7 @@ interface IDataItem {
   size: number[];
   title: string;
   types: number[];
+  count?: number;
 }
 
 interface IDataSlice  {
