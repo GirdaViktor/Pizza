@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import "./Style.scss";
+
 const Categories: React.FC = () => {
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
   const [categoryId, setCategoryId] = useState(0);

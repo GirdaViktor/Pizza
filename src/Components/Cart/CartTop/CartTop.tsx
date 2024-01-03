@@ -1,5 +1,7 @@
 import React from 'react';
 
+import "./Style.scss";
+
 const CartTop:React.FC = () => {
   return (
     <div className="cart__top">

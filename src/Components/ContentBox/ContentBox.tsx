@@ -1,4 +1,6 @@
-import React, {ReactNode} from 'react';
+import React, { ReactNode } from 'react';
+
+import "./style.scss";
 
 type ContentProps = {
   className?: string;

@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+
+import "./style.scss";
 
 const Sort:React.FC = () => {
   const [open, setOpen] = useState(false);

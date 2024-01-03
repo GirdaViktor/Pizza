@@ -1,5 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { IDataItem } from "../../Redux/dataSlice";
+
+import "./Style.scss";
 
 const Card:React.FC<IDataItem> = ({...item}) => {
   const [activeSize, setActiveSize] = useState(0);

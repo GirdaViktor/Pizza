@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 
-import './app.css';
-
 import { fetchDataItems } from "./Redux/dataSlice";
-import {useAppDispatch} from "./Redux/Store";
+import { useAppDispatch } from "./Redux/Store";
 import RouteComponent from "./Components/RouteComponent/RouteComponent";
+
+import './app.css';
 
 function App() {
   const dispatch = useAppDispatch();

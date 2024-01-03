@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
+import "./Style.scss";
+
 const CartEmpty: React.FC = () => {
   return (
     <div className="cart cart--empty">
