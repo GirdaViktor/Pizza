@@ -1,9 +1,11 @@
-import {Button} from "@/components/ui/button";
+import {Container, Title} from "@/components/shared";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Button variant={'outline'}>Корзина</Button>
-    </main>
+    <>
+      <Container className={'mt-5'}>
+        <Title text={'Все пиццы'} size={'lg'} className={'font-extrabold'}/>
+      </Container>
+    </>
   );
 }
